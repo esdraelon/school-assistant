@@ -54,6 +54,8 @@ the plans settle.
 - `docs/PACKAGES.md` — package inventory: what exists, what gets
   built, what waits.
 - `docs/CODING-STANDARD.md` — the conventions every package follows.
+- `docs/PROJECT-INDEX.md` — the first build: school-index v1,
+  milestone plan (drafted 2026-10-23).
 - `docs/DECISIONS.md` — settled decisions and the open ones.
 - `docs/RAG-EVALUATION.md` — embeddings + vector store evaluation
   (Bedrock vs ONNX vs vector DBs) for the corpus index.
