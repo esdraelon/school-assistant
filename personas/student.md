@@ -12,9 +12,25 @@ material lives (deep links to the originals).
 
 ## Sub-modes
 
-### Notifications
-The same lead-time engine as Guardian, student config: what's due,
-what's coming, what a study plan looks like for the week.
+### Notifications — executive-function scaffolding
+Same lead-time engine as Guardian; opposite presentation. Guardian
+gets declarations ("Pythagorean retake due Monday"). The student
+gets **prompts that make him do the checking and planning** — the
+reminder exercises executive function instead of replacing it:
+
+- "Might be worth checking whether anything's due tomorrow."
+- "Anything you want to get ahead of tonight?"
+- Study mode: "Science test is Friday — what's your plan?"
+
+The persona knows the facts (they come from the stores); it
+withholds them deliberately, as pedagogy, not from uncertainty.
+Specificity **graduates**: a general prompt first, a more specific
+hint if there's no engagement, a direct statement only when a
+deadline is critical and prep clearly hasn't happened. Prompt
+level and Sam's responses are stored notification state — as the
+habit forms, prompts should get *less* specific over time, not
+more. Guardian notifications stay declarative; the parents aren't
+the ones being trained.
 
 ### Tutor mode
 - **Guidance, never answers.** The tutor does not solve the assigned

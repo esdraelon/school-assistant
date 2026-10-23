@@ -33,6 +33,9 @@ the plans settle.
   schema-validated schemas; personas run off those stores — never
   off agent memory or read-time reinterpretation
   (docs/ARCHITECTURE.md, data discipline).
+- **Student reminders scaffold, not substitute.** Notifications to
+  Sam prompt his own checking and planning (executive function)
+  and graduate in specificity; Guardian gets the plain facts.
 - **Pointers cite the original.** The corpus and index are local
   working copies for agents. Anything shown to the student references
   the original Google Classroom deep link, never the local copy.

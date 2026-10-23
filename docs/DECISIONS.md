@@ -32,6 +32,13 @@ MCPs consumed by the orchestration agent.
 **2026-10-23 — Separate project.** This work lives in
 `school-assistant` on ululuth, not inside the adapter repo.
 
+**2026-10-23 — Student reminders scaffold executive function.**
+Student-facing notifications are prompts ("you might check if
+something is due tomorrow"), not declarations — the persona knows
+the record and withholds it on purpose. Specificity graduates with
+engagement and deadline criticality; prompt/response history is
+stored state. Guardian notifications stay declarative.
+
 **2026-10-23 — Data discipline.** Agents may sit on the ingestion
 path, but all operating evidence and artifacts are stored in
 discrete, concrete, schema-validated schemas on ululuth. Runtime
