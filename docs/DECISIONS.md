@@ -61,6 +61,20 @@ GitHub the mirror. The project tracks a context file (CONTEXT.md),
 a coding standard, and a development/orchestration skill from the
 start.
 
+**2026-10-23 — Index boundary: consume the adapter's MCP contract.**
+`school-index`'s `corpus_sync` consumes resource types via the
+school adapter's `get_resources` MCP contract (never its database);
+`school-core` extraction is NOT triggered — no second consumer of
+the domain types exists yet. Evidence (live gateway probe,
+2026-10-23): `get_resources("sam")` returned all 200 resources in
+a single call, no pagination — kinds TUTORIAL 102, LINK 57,
+DOCUMENT 21, NOTES 20 — each item carrying student, course, title,
+kind, url, source_kind, and scraped_at, with a url on all 200
+(docs.google.com 129, drive.google.com 44, www.ixl.com 19,
+sites.google.com 7, www.google.com 1). This also answers
+INDEX-DESIGN's open pagination question for v1 scale. Revisit
+extraction when a second type consumer actually appears.
+
 ## Open
 
 - **RAG stack** — embeddings (Bedrock vs local ONNX) and vector
