@@ -54,11 +54,22 @@ the ones being trained.
 - Triggered by QUIZ/TEST drivers and their due dates.
 - Build a study plan from the indexed material for that course/topic:
   the relevant resources (deep links), practice problems in the
-  tutor pattern (similar, worked), and **paced repetition** —
-  scheduled recall rounds between now and the test, tracked per
-  topic. Sessions ride the todo MCP as plan items.
+  tutor pattern (similar, worked).
 - Practice adapts to what Sam gets wrong in the rounds (the
   why-is-X-wrong path feeds the next round).
+
+**Spaced repetition runs in two modes:**
+- **Occasional prompting** — ad hoc retrieval questions woven into
+  the day on the notification channel: one question, low friction,
+  no session. Driven by per-topic repetition state (what's due for
+  recall, last result). Keeps material warm between study sessions
+  and after the test has passed.
+- **Focused study** — a deliberate session (rides the todo MCP as
+  a plan item) working a topic's question rounds toward a measured
+  goal: **85% mastery**. Rounds adapt — missed concepts recycle as
+  new similar problems — mastery is computed from round performance
+  and stored per topic; at goal, the session ends and the topic
+  drops back to occasional prompting for maintenance.
 
 ## Limits
 

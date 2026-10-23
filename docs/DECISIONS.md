@@ -32,6 +32,12 @@ MCPs consumed by the orchestration agent.
 **2026-10-23 — Separate project.** This work lives in
 `school-assistant` on ululuth, not inside the adapter repo.
 
+**2026-10-23 — Spaced repetition, two modes.** Occasional
+prompting (ad hoc retrieval questions on the notification channel,
+low friction) vs focused study sessions targeting **85% measured
+mastery** per topic. Mastery and repetition state are stored per
+topic, per the data discipline.
+
 **2026-10-23 — Student reminders scaffold executive function.**
 Student-facing notifications are prompts ("you might check if
 something is due tomorrow"), not declarations — the persona knows

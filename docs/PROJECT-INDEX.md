@@ -28,30 +28,78 @@ notifications; any tutor behavior (consumers come after the MCP).
 - `index_mcp` — search MCP: passage search; topic → resources
   (deep links); worked-example lookup.
 
-## Milestones
+## Milestones — work checklist
 
-- **M0 — Skeleton + standards.** Repo scaffold per the coding
-  standard (verify.sh gates from day one); the `school-core`
-  question decided by evidence: consume resource types via the
-  adapter's store/gateway, or extract — record the call in
-  DECISIONS.md.
-- **M1 — Corpus sync (reachable sources).** Harvest the adapter's
-  current resources; store originals + metadata; idempotent
-  re-runs; sync watermark + tombstones.
-- **M2 — Extraction.** Text out of every harvested format;
-  extraction failures are per-item and visible, never silent.
-- **M3 — Chunk + embed (ONNX).** Strategy registry in place;
-  incremental re-embed on changed items only.
-- **M4 — Index MCP + deploy.** Gateway route (own token, path
-  scoped), three query tools, deep links in every result; deploy
-  per the runbook; smoke through the public route.
-- **M5 — RAG benchmark.** ~30 hand-labeled queries from the real
-  corpus; Bedrock vs ONNX pointer/passage accuracy; results in
-  docs/RAG-EVALUATION.md; the stack decision recorded in
-  DECISIONS.md (Noah's call, evidence attached).
-- **M6 — Tutor-facing shapes.** The exact query/response shapes the
-  student persona needs (pointer composition inputs, worked-example
-  retrieval), verified against personas/student.md.
+Design: docs/INDEX-DESIGN.md. Each milestone: one agent, stacked
+branch, discrete commits; the dispatcher re-runs verify.sh before
+accepting (coding standard).
+
+### M0 — Skeleton + standards
+- [ ] Repo scaffold: src layout, pyproject, `scripts/verify.sh`
+      (tests, ≥90% coverage, mypy strict, 500-LOC cap) green on an
+      empty package.
+- [ ] Verify `get_resources` against the live adapter (pagination,
+      counts, deep-link fields) — evidence for the boundary call.
+- [ ] Decide: consume resource types via the adapter's MCP contract
+      or extract `school-core`. Record in DECISIONS.md.
+- [ ] **Gate:** verify.sh green; decisions recorded.
+
+### M1 — Corpus sync (reachable sources)
+- [ ] `corpus_items` + `sync_state` schemas; store module.
+- [ ] Harvester over the adapter's resources: download/export,
+      content hash, idempotent re-runs (second run = no changes).
+- [ ] Tombstones for vanished resources; per-item failure records.
+- [ ] Fixture corpus from real resource shapes; system test mocks
+      only the HTTP edge.
+- [ ] **Gate:** full harvest of Sam's current resources completes;
+      re-run is a no-op; coverage ≥90%.
+
+### M2 — Extraction
+- [ ] Extractor registry (format → strategy); Slides (SVG-a11y),
+      Docs/Sheets export, PDF text layer, HTML/text passthrough.
+- [ ] `item_text` populated per item; per-item failure containment
+      with the failure stored, not logged-and-lost.
+- [ ] **Gate:** every ok corpus item has text or a failure record;
+      no silent skips in the run report.
+
+### M3 — Chunk + embed (ONNX)
+- [ ] Structure-aware chunker; `chunks` schema.
+- [ ] Embedding strategy registry; ONNX (bge) arm working on
+      hal9k (ARM); sqlite-vec store; `embeddings` keyed by chunk +
+      model_id.
+- [ ] Incremental: only changed chunks re-embed; model change =
+      explicit full re-embed op.
+- [ ] **Gate:** index builds from the real corpus; a changed item
+      re-embeds only its own chunks.
+
+### M4 — Index MCP + deploy
+- [ ] Three tools per the design (`search_passages`,
+      `resources_for_topic`, `worked_examples`); every result
+      carries title + course + deep link + provenance.
+- [ ] Deploy per the runbook: container, `/mcp/index/` route, own
+      token (`index-mcp`, path-scoped), volume ownership, timer.
+- [ ] Smoke through the public gateway route (real protocol);
+      sibling routes undisturbed.
+- [ ] **Gate:** live queries return traceable results; negative
+      auth checks pass; deploy notes land in deploy/README.md.
+
+### M5 — RAG benchmark
+- [ ] ~30-query labeled set from the real corpus (topics, expected
+      resources/passages), versioned as data.
+- [ ] Arms: ONNX+sqlite-vec vs Bedrock (same chunking); optional
+      chunking arm if accuracy looks chunk-bound.
+- [ ] Results stored as `benchmark_runs` records; summary into
+      docs/RAG-EVALUATION.md; stack decision recorded in
+      DECISIONS.md (Noah's call).
+- [ ] **Gate:** benchmark reproducible from the stored records.
+
+### M6 — Tutor-facing shapes
+- [ ] Walk personas/student.md flows (pointer answers, similar-
+      problem composition inputs, study-plan resource lists)
+      against the live MCP; file gaps as issues, fix what's cheap.
+- [ ] Response shapes frozen as the tutor contract (fixtures).
+- [ ] **Gate:** every student-persona query pattern returns what
+      the persona needs, deep links intact.
 
 ## Acceptance
 
