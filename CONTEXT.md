@@ -18,11 +18,18 @@ Full picture: README.md, docs/ARCHITECTURE.md, personas/.
 - **Repos (origin: hal9k `~/git/`, GitHub mirrors pending):**
   - `school-info-adapter` — extraction MCP. Clone: `~/school-info-adapter`.
   - `school-assistant` — this repo. Clone: `~/school-assistant`.
+  - `school-index` — corpus/index + search MCP. Clone:
+    `~/school-index`; corpus root `~/school-index-data` (corpus.db,
+    benchmark.db, model files).
 - **Live service:** container `haliffer-school-mcp` on hal9k;
   gateway route `https://haliffer.ululuth.com/mcp/school/`;
   scrape timer every 6h at :15; deploy dir `deploy-run/` inside
   the adapter clone; production deck registry excludes the
   tutorial deck.
+- **Live service (index):** search MCP at gateway route
+  `https://haliffer.ululuth.com/mcp/index/`; corpus pipeline
+  (harvest → extract → chunk/embed) on a systemd timer every 6h
+  at :45 against `~/school-index-data`.
 - **Gateway auth:** `/var/www/haliffer/auth/tokens.json` —
   sha256(token) → {client, paths}, checked per request by the
   `haliffer-auth` service behind nginx `auth_request`. The school
@@ -41,13 +48,25 @@ Full picture: README.md, docs/ARCHITECTURE.md, personas/.
 - Adapter M0–M7.5 built, deployed, verified through the gateway
   (476 unit + 17 system tests; the full suite runs green ON hal9k
   including real-Chromium Classroom tests).
+- school-index M0–M4 built and live (above). **M5 benchmark ran
+  2026-10-23** over the live corpus (33 labeled queries): ONNX
+  bge-small + sqlite-vec scored resources hit@3 0.93, passages
+  hit@3 1.00, ~30 ms/query; the Bedrock arm is BLOCKED (no AWS
+  credentials on hal9k — provider built, one config away); the
+  chunking arm was not triggered (0.93 ≥ the 0.7 rule).
+  Recommendation — keep ONNX + sqlite-vec — is recorded with the
+  full results in docs/RAG-EVALUATION.md; the stack decision is
+  Noah's. Notable finding: omnibus schedule docs are the universal
+  fallback (top hit on every absent-topic query), so tutor
+  thresholds must not trust raw scores (feeds M6).
 - CLASSROOM_WEB source awaits **profile birth**: a supervised
   session with Noah + Sam on hal9k (vault enrollment rides along).
   That also unblocks the corpus pull (docs/CLASSROOM-CORPUS.md).
 - Persona/capability design settled 2026-10-23 (docs/DECISIONS.md),
   including: config global for now; index scope = all Classroom
   docs with deep links preserved; events from calendars + email.
-- Open decisions: RAG stack (docs/RAG-EVALUATION.md),
+- Open decisions: RAG stack (benchmarked 2026-10-23 —
+  recommendation in docs/RAG-EVALUATION.md, Noah's call),
   similarity-check mechanism, events source inventory, Hermes
   scope per sub-agent.
 
