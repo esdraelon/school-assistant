@@ -51,6 +51,11 @@ start.
 - **Events source inventory** — which calendars exist, who owns
   them, what's already on the 8th grade calendar; email-derived
   event extraction scope. See docs/CALENDAR-EVENTS.md.
+- **Coordination mechanism** — proposed 2026-10-23: a shared
+  events store (blackboard) with per-source collectors publishing
+  normalized events under a contract; agent-to-agent requests are
+  the exception path for live questions only. Detailed in
+  docs/CALENDAR-EVENTS.md; settles when Noah nods.
 - **Hermes scope** — which sub-agent tasks, if any, run on Hermes
   vs the Muse agents. Decide per sub-agent definition.
 - **Corpus acquisition channel** — browser-driven via Sam's
