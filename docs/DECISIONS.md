@@ -32,6 +32,14 @@ MCPs consumed by the orchestration agent.
 **2026-10-23 — Separate project.** This work lives in
 `school-assistant` on ululuth, not inside the adapter repo.
 
+**2026-10-23 — Data discipline.** Agents may sit on the ingestion
+path, but all operating evidence and artifacts are stored in
+discrete, concrete, schema-validated schemas on ululuth. Runtime
+personas consume those stores as concrete ground truth — no
+operating from agent memory, no reinterpretation at read time.
+Interpretation happens once, at ingestion; provenance and
+freshness are properties of the record. See docs/ARCHITECTURE.md.
+
 **2026-10-23 — Package plan + GitHub.** Package inventory and
 repo plan in docs/PACKAGES.md (coarse repos, internal packages;
 `school-core` extraction deferred until a second consumer exists).
@@ -51,11 +59,12 @@ start.
 - **Events source inventory** — which calendars exist, who owns
   them, what's already on the 8th grade calendar; email-derived
   event extraction scope. See docs/CALENDAR-EVENTS.md.
-- **Coordination mechanism** — proposed 2026-10-23: a shared
-  events store (blackboard) with per-source collectors publishing
-  normalized events under a contract; agent-to-agent requests are
-  the exception path for live questions only. Detailed in
-  docs/CALENDAR-EVENTS.md; settles when Noah nods.
+- **Coordination mechanism** — DEFERRED (Noah, 2026-10-23: cross
+  that bridge later). The shared events store + normalized schema
+  in docs/CALENDAR-EVENTS.md are settled as part of the data
+  discipline; how collectors/agents are dispatched and coordinated
+  is the deferred part, and the discipline is what makes deferring
+  it cheap.
 - **Hermes scope** — which sub-agent tasks, if any, run on Hermes
   vs the Muse agents. Decide per sub-agent definition.
 - **Corpus acquisition channel** — browser-driven via Sam's

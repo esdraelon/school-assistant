@@ -21,7 +21,14 @@ Known/expected sources, to be inventoried before any build:
   event (what/when/where) is an agent task, and dedup against the
   calendar entries is required so a concert isn't double-counted.
 
-## Coordination — shared store, not agent chatter (proposed)
+## Coordination — shared store; dispatch mechanism deferred
+
+**Status (2026-10-23):** the events store and its normalized
+schema are settled — they follow from the data discipline
+(docs/ARCHITECTURE.md): personas bind to stored records, not to
+how the records got there. How collectors are scheduled and
+dispatched is **deferred** (Noah: cross that bridge later), and
+the store is what makes deferring safe. The leading candidate:
 
 The backbone is a **blackboard**: a shared events store owned by
 `school-calendar`, on hal9k, that every participant reads/writes

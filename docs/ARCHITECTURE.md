@@ -20,6 +20,33 @@ exposes it over the gateway pattern (own route, own token, path
 scoped). Personas and policy live in the orchestration layer, never
 in an MCP.
 
+## Data discipline
+
+The system's hard rule (Noah, 2026-10-23):
+
+- **All operating evidence and artifacts live in discrete, concrete
+  schemas** — typed records in stores on hal9k, validated at the
+  write boundary. The adapter's domain layer is the reference
+  implementation: nothing enters its store unvalidated.
+- **Agents may sit on the ingestion path.** Extraction from prose,
+  pages, and decks is legitimately agentic and fuzzy — but an
+  agent's output becomes operational only as a schema-validated
+  record. Ingestion is where interpretation happens, and it
+  happens **once**.
+- **Runtime personas read stores, through MCP tools.** Never raw
+  sources, never the model's own memory or recollection of a prior
+  run, never a reinterpretation of a source at read time. Reads
+  are lookups against records treated as concrete and correct.
+- **Provenance and freshness are properties of the record**
+  (source, captured-at, source health) — so anything a persona
+  states traces to the record it came from, and staleness is
+  computed from the store, not recalled.
+
+Corollary: because personas bind to stored schemas rather than to
+how records got produced, coordination mechanisms between agents
+(orchestration, dispatch, messaging) are interchangeable
+implementation details — chosen, and changeable, later.
+
 ## MCP inventory
 
 | MCP | Job | Status |

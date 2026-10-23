@@ -54,6 +54,11 @@ Full picture: README.md, docs/ARCHITECTURE.md, personas/.
 ## Rules that bite (details in docs/CODING-STANDARD.md)
 
 - MCPs stay single-purpose; policy lives in the orchestration layer.
+- **Personas read stores, not memory.** All operating evidence is a
+  schema-validated record in a store on hal9k; interpretation
+  happens once, at ingestion (docs/ARCHITECTURE.md — data
+  discipline). The agent-coordination mechanism for external
+  sources is deferred; the store/schema contract is not.
 - Student references always cite the original Classroom deep link.
 - Tutor never answers the assigned problem — guidance, similar
   problems, why-is-X-wrong, pointers.

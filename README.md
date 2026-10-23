@@ -28,6 +28,11 @@ the plans settle.
 
 ## Principles
 
+- **Evidence is stored, not remembered.** Agents may ingest, but
+  everything operational lands in discrete, concrete,
+  schema-validated schemas; personas run off those stores — never
+  off agent memory or read-time reinterpretation
+  (docs/ARCHITECTURE.md, data discipline).
 - **Pointers cite the original.** The corpus and index are local
   working copies for agents. Anything shown to the student references
   the original Google Classroom deep link, never the local copy.
