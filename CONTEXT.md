@@ -48,17 +48,27 @@ Full picture: README.md, docs/ARCHITECTURE.md, personas/.
 - Adapter M0–M7.5 built, deployed, verified through the gateway
   (476 unit + 17 system tests; the full suite runs green ON hal9k
   including real-Chromium Classroom tests).
-- school-index M0–M4 built and live (above). **M5 benchmark ran
-  2026-10-23** over the live corpus (33 labeled queries): ONNX
-  bge-small + sqlite-vec scored resources hit@3 0.93, passages
-  hit@3 1.00, ~30 ms/query; the Bedrock arm is BLOCKED (no AWS
-  credentials on hal9k — provider built, one config away); the
-  chunking arm was not triggered (0.93 ≥ the 0.7 rule).
-  Recommendation — keep ONNX + sqlite-vec — is recorded with the
-  full results in docs/RAG-EVALUATION.md; the stack decision is
-  Noah's. Notable finding: omnibus schedule docs are the universal
-  fallback (top hit on every absent-topic query), so tutor
-  thresholds must not trust raw scores (feeds M6).
+- **school-index v1 COMPLETE (M0–M6, 2026-10-23)** and live
+  (above). M5 benchmark over the live corpus (33 labeled
+  queries): ONNX bge-small + sqlite-vec, resources hit@3 0.93 /
+  passages 1.00 at ~30 ms; Bedrock arm BLOCKED (no AWS
+  credentials on hal9k — provider built, one config away). M6
+  closed the two M5 findings: **banded item aggregation**
+  (benchmark re-run `onnx-production-v1.0-20261023T161119188397`:
+  resources hit@1 0.97 / hit@3 **1.00** / MRR 0.977, passages
+  unchanged) and **`match_quality`** on every tool envelope
+  (absent probes 4/4 weak; scored tops strong 28/29 resources,
+  27/29 passages). Response shapes are frozen as **tutor
+  contract v1** (school-index repo: docs/TUTOR-CONTRACT.md +
+  contract fixtures). The RAG stack decision remains **Noah's**
+  — recommendation (keep ONNX + sqlite-vec) and evidence in
+  docs/RAG-EVALUATION.md. **What remains:** profile birth
+  expands the corpus (Classroom channel into corpus_sync;
+  expect the calibration constants to be re-derived against the
+  larger corpus); two recorded issues — why-is-X-wrong phrasings
+  under-score (tutor-side concept reformulation is the
+  mitigation) and title ambiguity in the corpus (pointers are
+  unambiguous by deep link). See docs/PROJECT-INDEX.md closeout.
 - CLASSROOM_WEB source awaits **profile birth**: a supervised
   session with Noah + Sam on hal9k (vault enrollment rides along).
   That also unblocks the corpus pull (docs/CLASSROOM-CORPUS.md).
