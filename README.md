@@ -44,9 +44,16 @@ the plans settle.
 
 ## Map
 
+- `CONTEXT.md` — the context file: what this is, where things live,
+  current state. Agents read it first.
 - `personas/` — the persona definitions (the basis for the agent
   definitions): `guardian.md`, `student.md`, `orchestrator.md`.
+- `skills/development-orchestration/SKILL.md` — how building and
+  operations work is done in this estate.
 - `docs/ARCHITECTURE.md` — layers, MCP inventory, data flows.
+- `docs/PACKAGES.md` — package inventory: what exists, what gets
+  built, what waits.
+- `docs/CODING-STANDARD.md` — the conventions every package follows.
 - `docs/DECISIONS.md` — settled decisions and the open ones.
 - `docs/RAG-EVALUATION.md` — embeddings + vector store evaluation
   (Bedrock vs ONNX vs vector DBs) for the corpus index.

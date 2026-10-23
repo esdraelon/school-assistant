@@ -32,6 +32,14 @@ MCPs consumed by the orchestration agent.
 **2026-10-23 — Separate project.** This work lives in
 `school-assistant` on ululuth, not inside the adapter repo.
 
+**2026-10-23 — Package plan + GitHub.** Package inventory and
+repo plan in docs/PACKAGES.md (coarse repos, internal packages;
+`school-core` extraction deferred until a second consumer exists).
+Noah creates the GitHub repos; ululuth stays the working origin,
+GitHub the mirror. The project tracks a context file (CONTEXT.md),
+a coding standard, and a development/orchestration skill from the
+start.
+
 ## Open
 
 - **RAG stack** — embeddings (Bedrock vs local ONNX) and vector
