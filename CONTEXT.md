@@ -174,3 +174,10 @@ Full picture: README.md, docs/ARCHITECTURE.md, personas/.
 - **Pagination & coverage (standing rule, 2026-10-24):** no
   consumer relies on a single default-limit call. Page to
   exhaustion; prove total count + min/max bounds in tests.
+- **Orchestration paradigm, always (reaffirmed 2026-10-24):**
+  plan → design → milestone checklist → code → hygiene gates
+  (coverage, mypy strict, LOC cap, system tests) → dispatcher
+  re-runs gates independently → stacked branches, fast-forward
+  to main only. It applies to **bug-hunt spikes too** — a spike
+  gets a scaled plan + checklist + gates, never a shortcut
+  around them. (skills/development-orchestration/SKILL.md)
